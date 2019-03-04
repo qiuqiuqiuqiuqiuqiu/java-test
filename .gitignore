@@ -23,6 +23,9 @@
 hs_err_pid*
 
 # IntelliJ IDEA
-*.iws
-workspace.xml
-tasks.xml
+.idea/.name
+.idea/compiler.xml
+.idea/misc.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+.idea/workspace.xml
