@@ -35,7 +35,7 @@ public class test_MyException {
 
     private static void processFile(String file) throws MyException {
         if(file == null) throw new MyException("File name can't be null", "NULL_FILE_NAME");
-        
+
         InputStream fis = null;
         try {
             fis = new FileInputStream(file);
