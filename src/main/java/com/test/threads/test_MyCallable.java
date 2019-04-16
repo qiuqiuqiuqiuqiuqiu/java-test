@@ -22,7 +22,9 @@ public class test_MyCallable{
         for(Future<String> fut:list){
             try{
                 System.out.println(new Date()+"::"+fut.get());
-            }catch (InterruptedException | ExecutionException e){
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            } catch (ExecutionException e) {
                 e.printStackTrace();
             }
         }

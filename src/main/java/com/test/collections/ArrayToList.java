@@ -12,7 +12,7 @@ public class ArrayToList {
         List<String> vowelsList = Arrays.asList(vowels);
         System.out.println(vowelsList);
 
-        List<String> myList = new ArrayList<>();
+        List<String> myList = new ArrayList<String>();
         for(String s : vowels) {
             myList.add(s);
         }

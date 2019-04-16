@@ -7,7 +7,7 @@ import java.util.List;
 public class ListToArray {
 
     public static void main(String[] args) {
-        List<String> letters = new ArrayList<>();
+        List<String> letters = new ArrayList<String>();
 
         letters.add("A");
         letters.add("B");

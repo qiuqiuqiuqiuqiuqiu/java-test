@@ -1,14 +1,11 @@
 package com.test.docker;
 
 import com.spotify.docker.client.DefaultDockerClient;
-import com.spotify.docker.client.DockerCertificates;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.LogStream;
 import com.spotify.docker.client.exceptions.DockerException;
 import com.spotify.docker.client.messages.*;
 
-import java.net.URI;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class DockerClientExample {
@@ -53,9 +50,9 @@ public class DockerClientExample {
 
         // Bind container ports to host ports
         final String[] ports = {"80", "22", "443"};
-        final Map<String, List<PortBinding>> portBindings = new HashMap<>();
+        final Map<String, List<PortBinding>> portBindings = new HashMap<String, List<PortBinding>>();
         for (String port:ports) {
-            List<PortBinding> randomPort = new ArrayList<>();
+            List<PortBinding> randomPort = new ArrayList<PortBinding>();
             randomPort.add(PortBinding.randomPort("0.0.0.0"));
             portBindings.put(port, randomPort);
         }
@@ -102,7 +99,9 @@ public class DockerClientExample {
             final LogStream output = docker.execStart(execCreation.id());
             final String execOutput = output.readFully();
             System.out.println(execOutput);
-        } catch (DockerException | InterruptedException e) {
+        } catch (DockerException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

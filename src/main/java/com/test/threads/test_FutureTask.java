@@ -8,8 +8,8 @@ public class test_FutureTask {
         MyCallable callable1 = new MyCallable(1000);
         MyCallable callable2 = new MyCallable(2000);
 
-        FutureTask<String> futureTask1 = new FutureTask<>(callable1);
-        FutureTask<String> futureTask2 = new FutureTask<>(callable2);
+        FutureTask<String> futureTask1 = new FutureTask<String>(callable1);
+        FutureTask<String> futureTask2 = new FutureTask<String>(callable2);
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
         executor.execute(futureTask1);
@@ -32,9 +32,11 @@ public class test_FutureTask {
                 if(s!=null){
                     System.out.println("FutureTask2 output = "+s);
                 }
-            }catch (InterruptedException| ExecutionException e){
+            }catch (InterruptedException e){
                 e.printStackTrace();
             }catch (TimeoutException e){
+                e.printStackTrace();
+            } catch (ExecutionException e) {
                 e.printStackTrace();
             }
         }

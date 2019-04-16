@@ -13,7 +13,7 @@ public class test_ThreadPool {
 
         ThreadFactory threadFactory = Executors.defaultThreadFactory();
 
-        ThreadPoolExecutor executorPool = new ThreadPoolExecutor(2, 4, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(2), threadFactory, rejectionHandler);
+        ThreadPoolExecutor executorPool = new ThreadPoolExecutor(2, 4, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(2), threadFactory, rejectionHandler);
 
         MyMonitorThread monitor = new MyMonitorThread(executorPool, 3);
         Thread monitorThread = new Thread(monitor);
