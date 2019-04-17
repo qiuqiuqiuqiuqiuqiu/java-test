@@ -27,8 +27,8 @@ public class TestHashMap {
             }
         });
 
-        for (Map.Entry<String, Integer> mapping : list) {
-            System.out.println(mapping.getKey() + ": " + mapping.getValue());
-        }
+        map.forEach((k, v) -> System.out.println(k + ": " + v));
+        Arrays.asList("你好", "简单教程", "简单编程").forEach(System.out::println);
+        Arrays.asList("你好", "简单教程", "简单编程").forEach(v -> System.out.println(v));
     }
 }

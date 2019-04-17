@@ -1,23 +1,24 @@
 package com.test.collections;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 class TreeNode {
-    int val;
+    String val;
     TreeNode left;
     TreeNode right;
-    TreeNode(int x) {
+    TreeNode(String x) {
         this.val = x;
         this.left = null;
         this.right = null;
     }
 
-    public int getVal() {
+    public String getVal() {
         return val;
     }
 
-    public void setVal(int val) {
+    public void setVal(String val) {
         this.val = val;
     }
 
@@ -45,9 +46,13 @@ class TreeNode {
 
 public class BinaryTree {
     public static void visit(TreeNode node) {
-        System.out.println(node.val);
+        System.out.print(node.val + " ");
     }
 
+    /**
+     * 二叉树的先序遍历
+     * 输出结果是：A B D E C F G
+      */
     public static void preOrderRecursion(TreeNode root){
         if (root != null) {
             visit(root);
@@ -56,7 +61,35 @@ public class BinaryTree {
         }
     }
 
-    public static void preOrderTraversal(TreeNode root) {
+    /**
+     * 中序遍历
+     * 输出结果是: B D E A C F G
+      */
+    public static void inOrderRecursion(TreeNode root){
+        if (root != null) {
+            preOrderRecursion(root.left);
+            visit(root);
+            preOrderRecursion(root.right);
+        }
+    }
+
+    /**
+     * 后续遍历
+     * 输出结果是：B D E C F G A
+     */
+    public static void postOrderRecursion(TreeNode root){
+        if (root != null) {
+            preOrderRecursion(root.left);
+            preOrderRecursion(root.right);
+            visit(root);
+        }
+    }
+
+    /**
+     * 用Stack实现 深度优先搜索算法（Depth First Search）
+     * 排序后的结果是：A B D E C F G
+     */
+    public static void DFS(TreeNode root) {
         if (root == null) {
             return;
         }
@@ -72,14 +105,45 @@ public class BinaryTree {
         }
     }
 
-    public static void main(String[] args){
-        TreeNode tree = new TreeNode(10);
-        tree.setLeft(new TreeNode(3));
-        tree.setRight(new TreeNode(5));
-        tree.getLeft().setLeft(new TreeNode(6));
-        tree.getLeft().setRight(new TreeNode(8));
+    /**
+     * 用Queue实现 广度优先搜索算法（Breadth First Search）
+     * 排序后的结果是： A B C D E F G
+      */
 
+    public static void BFS(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> treeQueue = new LinkedList<>();
+        treeQueue.add(root);
+        while(!treeQueue.isEmpty()) {
+            TreeNode temp = treeQueue.poll();
+            if(temp != null) {
+                visit(temp);
+                treeQueue.add(temp.left);
+                treeQueue.add(temp.right);
+            }
+        }
+    }
+
+    public static void main(String[] args){
+        TreeNode tree = new TreeNode("A");
+        tree.setLeft(new TreeNode("B"));
+        tree.setRight(new TreeNode("C"));
+        tree.getLeft().setLeft(new TreeNode("D"));
+        tree.getLeft().setRight(new TreeNode("E"));
+        tree.getRight().setLeft(new TreeNode("F"));
+        tree.getRight().setRight(new TreeNode("G"));
+
+        System.out.println("\n先序遍历，递归方法实现");
         preOrderRecursion(tree);
-        preOrderTraversal(tree);
+        System.out.println("\n中序遍历，递归方法实现");
+        inOrderRecursion(tree);
+        System.out.println("\n后序遍历，递归方法实现");
+        postOrderRecursion(tree);
+        System.out.println("\n深度优先遍历，Stack方法实现");
+        DFS(tree);
+        System.out.println("\n广度优先遍历，Queue方法实现");
+        BFS(tree);
     }
 }
