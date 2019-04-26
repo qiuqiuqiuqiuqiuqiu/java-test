@@ -5,48 +5,19 @@ import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.LogStream;
 import com.spotify.docker.client.exceptions.DockerException;
 import com.spotify.docker.client.messages.*;
-
 import java.util.*;
 
 public class DockerClientExample {
-
-    // uri: http://localhost:2375
-    // host: localhost
     public static void main(String[] args) throws Exception {
-
         /**
          * docker http failed may caused by corporate firewall, workarounds:
          * 1. connect to mobile phone Hotspot;
          * 2. connect to clear-guest wifi;
           */
-
         // Create a client based on DOCKER_HOST and DOCKER_CERT_PATH env vars
         final DockerClient docker = DefaultDockerClient.fromEnv().build();
-
-        // use the builder to create a client
-        // DefaultDockerClient.Builder builder = DefaultDockerClient.builder();
-        // RegistryAuth auth = RegistryAuth.builder()
-        //         .serverAddress("localhost")
-        //         .username("")
-        //         .password("")
-        //         .build();
-        // DefaultDockerClient docker = builder
-        //         .uri("unix:///var/run/docker.sock")
-        //         .registryAuth(auth)
-        //         .build();
-
-        // final DockerClient docker = DefaultDockerClient.builder()
-        //         .uri(URI.create("https://localhost:2375"))
-        //         .dockerCertificates(new DockerCertificates(Paths.get("/Users/ethan/.docker/key/")))
-        //         .build();
-
-        System.out.println("ping: " + docker.ping());
-        System.out.println("cert: " + DefaultDockerClient.fromEnv().dockerCertificates());
-        DefaultDockerClient.fromEnv().dockerCertificates();
-        System.out.println("host: " + docker.getHost());
-        System.out.println("uri: " + DefaultDockerClient.fromEnv().uri().toString());
-        System.out.println(docker.info().toString());
-        // docker.pull("busybox:latest");
+        docker.ping();
+        docker.pull("busybox:latest");
 
         // Bind container ports to host ports
         final String[] ports = {"80", "22", "443"};
